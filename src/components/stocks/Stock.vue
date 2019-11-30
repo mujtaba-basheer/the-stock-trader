@@ -10,6 +10,7 @@
             <div class="panel-body">
                 <div class="pull-left">
                     <input
+                        :class="{danger: insufficientFunds}"
                         type="number"
                         class="form-control"
                         placeholder="Quantity"
@@ -19,13 +20,24 @@
                     <button
                         class="btn btn-success"
                         @click="buyStock"
-                        :disabled="quantity <= 0 || !Number.isInteger(quantity * 1)">Buy
+                        :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity * 1)"
+                        >{{ buttonText }}
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<style>
+    .danger {
+        border: 1px solid red;
+    }
+    .pull-left {
+        width: 175px;
+    }
+</style>
+
 <script>
     export default {
         props: ['stock'],
@@ -45,6 +57,17 @@
                 this.$store.dispatch('buyStock', order);
                 this.quantity = null;
             }
-        }
+        },
+        computed: {
+            insufficientFunds () {
+                return this.quantity * this.stock.price > this.funds;
+            },
+            funds () {
+                return this.$store.getters.funds;
+            },
+            buttonText () {
+                return (this.insufficientFunds ? 'Insufficient Funds' : 'Buy')
+            }
+        },
     }
 </script>

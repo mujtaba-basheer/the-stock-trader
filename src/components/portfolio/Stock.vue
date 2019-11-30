@@ -10,6 +10,7 @@
             <div class="panel-body">
                 <div class="pull-left">
                     <input
+                        :class="{danger: insufficientFunds}"
                         type="number"
                         class="form-control"
                         placeholder="Quantity"
@@ -19,13 +20,23 @@
                     <button
                         class="btn btn-info"
                         @click="sellStock"
-                        :disabled="quantity <= 0 || !Number.isInteger(quantity * 1)">Sell
+                        :disabled="insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity * 1)">Sell
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<style>
+    .danger {
+        border: 1px solid red;
+    }
+    .pull-left {
+        width: 175px;
+    }
+</style>
+
 <script>
     import { mapActions } from 'vuex'
     export default {
@@ -51,6 +62,14 @@
         },
         created() {
             console.log(this.stocks);
+        },
+        computed: {
+            insufficientQuantity () {
+                return this.quantity > this.stock.quantity;
+            },
+            buttonText() {
+                return this.insufficientQuantity ? 'Insufficient Stocks' : 'Sell'
+            }
         },
     }
 </script>
