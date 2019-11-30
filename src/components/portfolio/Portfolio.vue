@@ -1,3 +1,24 @@
 <template>
-    <h1>The Portfolio Component</h1>
+    <div>
+        <h3>Number of stocks: {{ stocks.length }}</h3>
+        <app-stock v-for="stock in stocks" :key="stock.id" :stock="stock"></app-stock>
+    </div>
 </template>
+
+<script>
+    import { mapGetters } from 'vuex'
+    import Stock from './Stock'
+    export default {
+        computed: {
+            ...mapGetters ({
+                stocks: 'stockPortfolio'
+            })
+        },
+        components: {
+            appStock: Stock
+        },
+        created() {
+            console.log(this.stocks)
+        },
+    }
+</script>
