@@ -23,11 +23,9 @@ const mutations = {
         } else {
             state.stocks.splice(state.stocks.indexOf(record));
         }
-        console.log(state.funds);
         stockPrice *= 1;
         quantity *= 1;
         state.funds += stockPrice * quantity;
-        console.log(state.funds);
     }
 }
 
@@ -41,7 +39,6 @@ const getters = {
     stockPortfolio (state, getters) {
         return state.stocks.map(stock => {
             const record = getters.stocks.find(element => element.id == stock.id);
-            console.log({record});
             return {
                 id: stock.id,
                 quantity: stock.quantity,

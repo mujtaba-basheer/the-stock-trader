@@ -14,8 +14,9 @@
                 <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
                 <ul class="navbar-nav nav navbar-right">
                     <li><a href="#" @click="endDay()">End Day</a></li>
-                    <li class="dropdown">
+                    <li class="dropdown" :class="{open: isDropdownOpen}">
                         <a
+                            @click = "isDropdownOpen = !isDropdownOpen"
                             href="#"
                             class="dropdown-toggle"
                             data-toggle="dropdown"
@@ -50,6 +51,11 @@
             ]),
             endDay() {
                 this.randomizeStocks();
+            }
+        },
+        data() {
+            return {
+                isDropdownOpen: false
             }
         },
     }

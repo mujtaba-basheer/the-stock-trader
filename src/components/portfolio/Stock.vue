@@ -56,7 +56,6 @@
                     stockPrice: this.stock.price,
                     quantity: this.quantity * 1
                 };
-                console.log({sellStock: order})
                 this.placeSellOrder(order);
                 this.quantity = 0;
             }

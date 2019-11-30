@@ -17,8 +17,5 @@
         components: {
             appStock: Stock
         },
-        created() {
-            console.log({stocks: this.stocks})
-        },
     }
 </script>
