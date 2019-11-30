@@ -18,7 +18,7 @@
             appStock: Stock
         },
         created() {
-            console.log(this.stocks)
+            console.log({stocks: this.stocks})
         },
     }
 </script>

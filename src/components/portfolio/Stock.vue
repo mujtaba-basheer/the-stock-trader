@@ -10,7 +10,7 @@
             <div class="panel-body">
                 <div class="pull-left">
                     <input
-                        :class="{danger: insufficientFunds}"
+                        :class="{danger: insufficientQuantity}"
                         type="number"
                         class="form-control"
                         placeholder="Quantity"
@@ -54,14 +54,12 @@
                 const order = {
                     stockId: this.stock.id,
                     stockPrice: this.stock.price,
-                    quantity: this.quantity
+                    quantity: this.quantity * 1
                 };
+                console.log({sellStock: order})
                 this.placeSellOrder(order);
                 this.quantity = 0;
             }
-        },
-        created() {
-            console.log(this.stocks);
         },
         computed: {
             insufficientQuantity () {

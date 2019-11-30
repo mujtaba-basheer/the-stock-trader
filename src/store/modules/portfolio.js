@@ -23,13 +23,17 @@ const mutations = {
         } else {
             state.stocks.splice(state.stocks.indexOf(record));
         }
+        console.log(state.funds);
+        stockPrice *= 1;
+        quantity *= 1;
         state.funds += stockPrice * quantity;
+        console.log(state.funds);
     }
 }
 
 const actions = {
     sellStock({commit}, order) {
-        commit('SELL_STOCK', order)
+        commit('SELL_STOCK', order);
     }
 }
 
@@ -37,12 +41,12 @@ const getters = {
     stockPortfolio (state, getters) {
         return state.stocks.map(stock => {
             const record = getters.stocks.find(element => element.id == stock.id);
-            console.log(record);
+            console.log({record});
             return {
                 id: stock.id,
                 quantity: stock.quantity,
                 name: record.name,
-                record: record.price
+                price: record.price
             }
         });
     },
